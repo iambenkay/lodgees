@@ -12,7 +12,7 @@ class Zone(models.Model):
     base_price = models.IntegerField(default=0, null=True)
 
     def __str__(self):
-        return f"{self.name}({self.code})"
+        return "%s(%s)" % (self.name, self.name)
 
 
 class Lodge(models.Model):
@@ -26,7 +26,7 @@ class Lodge(models.Model):
     applicants = models.ManyToManyField(User, related_name="interests", blank=True)
 
     def __str__(self):
-        return f"{self.name} Lodge in {self.zone}"
+        return "%s Lodge in %s" % (self.name, self.zone)
 
 
 class Transaction(models.Model):
@@ -36,7 +36,7 @@ class Transaction(models.Model):
     status = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"#{self.id} - for {self.lodge} on {self.time} by {self.user}.(completed transaction - {self.status})"
+        return "#%i - for %s by %s" % (self.id, self.lodge, self.time, self.user)
 
 
 class Testimony(models.Model):
@@ -44,7 +44,7 @@ class Testimony(models.Model):
     testimony = models.CharField(max_length=800)
 
     def __str__(self):
-        return f"{self.user} wrote a testimony."
+        return "%s wrote a testimony." % self.user
 
 
 class Profile(models.Model):
@@ -56,4 +56,4 @@ class Profile(models.Model):
     gender = models.CharField(max_length=15, default="Rather not say")
 
     def __str__(self):
-        return f"{self.firstname} {self.lastname}"
+        return "%s %s" % (self.firstname, self.lastname)
