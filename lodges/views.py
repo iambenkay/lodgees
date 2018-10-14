@@ -46,12 +46,12 @@ def search(request):
             for z in Zone.objects.all():
                 if advanced_search(request.GET["zone"], z.name) or re.search(request.GET["zone"], z.name) or re.search(z.name, request.GET["zone"]):
                     context["lodges"] += Lodge.objects.all().filter(zone=z)
-            context["message"] = f"'{request.GET['zone']}' did not match any lodge!"
+            context["message"] = "'%s' did not match any lodge!" % request.GET['zone']
         elif request.GET["val"] == 'lodge':
             for l in Lodge.objects.all():
                 if advanced_search(request.GET["lodge"], l.name) or re.search(request.GET["lodge"], l.name) or re.search(l.name, request.GET["lodge"]):
                     context["lodges"] += Lodge.objects.all().filter(name=l.name)
-            context["message"] = f"'{request.GET['lodge']}' did not match any lodge!"
+            context["message"] = "'%s' did not match any lodge!" % request.GET['lodge']
 
     return render(request, "search.html", context)
 
@@ -89,7 +89,7 @@ def listing(request, lodge_id):
 
 def dashboard_payment(request, t_id):
     if not request.user.is_authenticated and not request.user.is_active:
-        return HttpResponseRedirect(f"/login?next={request.path}")
+        return HttpResponseRedirect("/login?next=%s" % request.path)
     context = {
         "t": Transaction.objects.get(pk=t_id)
     }
@@ -101,7 +101,8 @@ def dashboard_payment(request, t_id):
 
 def print_receipt(request,t_id):
     if not request.user.is_authenticated and not request.user.is_active:
-        return HttpResponseRedirect(f"/login?next={request.path}")
+        return HttpResponseRedirect("/login?next=%s" % request.path)
+        
 
     context = {}
 
@@ -115,7 +116,7 @@ def print_receipt(request,t_id):
 
 def login(request):
     context = {
-        "next": "/" if "next" not in request.GET else f"{request.GET['next']}",
+        "next": "/" if "next" not in request.GET else "%s" % request.GET['next'],
     }
     if request.method == "POST":
         username = request.POST["username"].lower()
@@ -159,7 +160,7 @@ def logout(request):
 
 def dashboard(request):
     if not request.user.is_authenticated and not request.user.is_active:
-        return HttpResponseRedirect(f"/login?next={request.path}")
+        return HttpResponseRedirect("/login?next=%s" % request.path)
     context = {
         "user": request.user,
     }
@@ -168,7 +169,7 @@ def dashboard(request):
 
 def dashboard_pages_profile(request):
     if not request.user.is_authenticated and not request.user.is_active:
-        return HttpResponseRedirect(f"/login?next={request.path}")
+        return HttpResponseRedirect("/login?next=%s" % request.path)
     context = {
         "user": request.user,
         "profile": Profile.objects.get(user=request.user)
@@ -178,7 +179,7 @@ def dashboard_pages_profile(request):
 
 def dashboard_pages_transaction(request):
     if not request.user.is_authenticated and not request.user.is_active:
-        return HttpResponseRedirect(f"/login?next={request.path}")
+        return HttpResponseRedirect("/login?next=%s" % request.path)
     context = {
         "user": request.user,
     }
@@ -211,7 +212,7 @@ def signup(request):
 
 def interested(request, lodge_id):
     if not request.user.is_authenticated and not request.user.is_active:
-        return HttpResponseRedirect(f"/login?next={request.path}")
+        return HttpResponseRedirect("/login?next=%s" % request.path)
     user = request.user
     if len(user.interests.all()) > 0:
         user.interests.all()[0].applicants.remove(user)
@@ -223,7 +224,7 @@ def interested(request, lodge_id):
 
 def book(request, id):
     if not request.user.is_authenticated and not request.user.is_active:
-        return HttpResponseRedirect(f"/login?next={request.path}")
+        return HttpResponseRedirect("/login?next=%s" % request.path)
     try:
         t = Transaction(user=request.user, lodge=Lodge.objects.get(pk=id))
         t.save()
@@ -232,12 +233,12 @@ def book(request, id):
 
     except Lodge.DoesNotExist:
         return HttpResponseRedirect("/dashboard")
-    return HttpResponseRedirect(f"/dashboard")
+    return HttpResponseRedirect("/dashboard")
 
 
 def uninterested(request, lodge_id):
     if not request.user.is_authenticated and not request.user.is_active:
-        return HttpResponseRedirect(f"/login?next={request.path}")
+        return HttpResponseRedirect("/login?next=%s" % request.path)
     user = request.user
     l = Lodge.objects.get(pk=lodge_id)
     l.applicants.remove(user)
