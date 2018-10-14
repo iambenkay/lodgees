@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/assets/images/favicon.png">
+    <title>Transaction -- lodgees</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/static/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- chartist CSS -->
+    <link href="/static/assets/plugins/chartist-js/dist/chartist.min.css" rel="stylesheet">
+    <link href="/static/assets/plugins/chartist-js/dist/chartist-init.css" rel="stylesheet">
+    <link href="/static/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css"
+          rel="stylesheet">
+    <!--This page css - Morris CSS -->
+    <link href="/static/assets/plugins/c3-master/c3.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/static/css/style.css" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="/static/css/colors/blue.css" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+
+<body class="fix-header fix-sidebar card-no-border">
+<!-- ============================================================== -->
+<!-- Preloader - style you can find in spinners.css -->
+<!-- ============================================================== -->
+<div class="preloader">
+    <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+    </svg>
+</div>
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<div id="main-wrapper">
+    <!-- ============================================================== -->
+    <!-- Topbar header - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    {% include 'dashboard-nav.html' %}
+    <!-- ============================================================== -->
+    <!-- End Topbar header -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+    <aside class="left-sidebar">
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav">
+                <ul id="sidebarnav">
+                    <li><a class="waves-effect waves-dark" href="/dashboard" aria-expanded="false"><i
+                            class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard</span></a>
+                    </li>
+                    <li><a class="waves-effect waves-dark" href="/dashboard/profile" aria-expanded="false"><i
+                            class="mdi mdi-account-check"></i><span class="hide-menu">Profile</span></a>
+                    </li>
+                    <li><a class="waves-effect waves-dark" href="/dashboard/transaction" aria-expanded="false"><i
+                            class="mdi mdi-history"></i><span class="hide-menu">Transaction History</span></a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+        <!-- Bottom points-->
+        {% include 'dashboard-bar-footer.html' %}
+        <!-- End Bottom points-->
+    </aside>
+    <!-- ============================================================== -->
+    <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Page wrapper  -->
+    <!-- ============================================================== -->
+    <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="row page-titles">
+                <div class="col-md-5 col-8 align-self-center">
+                    <h3 class="text-themecolor m-b-0 m-t-0">Transaction History</h3>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item active">Transaction</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ============================================================== -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="col-lg-8 col-xlg-9 col-md-7" style="margin: auto">
+                        <div class="card">
+                            <div class="card-title" style="padding: 15px;"><h3>Your Transactions</h3></div>
+                            {% if user.transactions.all %}
+                            {% for t in user.transactions.all %}
+                                <div>
+                                    <hr class="m-t-0 m-b-0">
+                                </div>
+                                <div class="card-block transaction-success">
+                                    <b>Lodge Name:</b> {{ t.lodge.name }} lodge<br>
+                                    <b>Zone:</b> {{ t.lodge.zone }} <br>
+                                    <b>Date:</b> {{ t.time }} <br>
+                                    <b>Payment Status:</b> {% if t.status %}Completed{% else %}Pending{% endif %} <br>
+                                    <div style="float: right">
+                                        {% if t.status %}
+                                            <form action="/dashboard/{{t.id}}/print-receipt" method="post">
+                                                {% csrf_token %}
+                                                <button class="btn"><span class="mdi mdi-printer"></span>Print
+                                                    reciept
+                                                </button>
+                                            </form>
+                                            {% else %}
+                                            <form action="/dashboard/{{t.id}}/payment">
+                                                    <button class="btn"><span class="mdi mdi-bank"></span>Pay
+                                                    </button>
+                                                </form>
+                                            {% endif %}
+                                        </div>
+                                </div>
+                            {% endfor %}
+                            <div>
+                                <hr class="m-t-0 m-b-0">
+                            </div>
+                        {% else %}
+                            <div style="margin:10px;">You have not performed any transactions yet</div>
+                        {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End PAge Content -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Container fluid  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+        <footer class="footer">
+            © 2018 Lodgees.com
+        </footer>
+        <!-- ============================================================== -->
+        <!-- End footer -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Page wrapper  -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Wrapper -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- All Jquery -->
+<!-- ============================================================== -->
+<script src="/static/assets/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap tether Core JavaScript -->
+<script src="/static/assets/plugins/bootstrap/js/tether.min.js"></script>
+<script src="/static/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<!-- slimscrollbar scrollbar JavaScript -->
+<script src="/static/js/jquery.slimscroll.js"></script>
+<!--Wave Effects -->
+<script src="/static/js/waves.js"></script>
+<!--Menu sidebar -->
+<script src="/static/js/sidebarmenu.js"></script>
+<!--stickey kit -->
+<script src="/static/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+<!--Custom JavaScript -->
+<script src="/static/js/custom.min.js"></script>
+</body>
+
+</html>

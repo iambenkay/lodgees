@@ -1,0 +1,93 @@
+<!-- Footer -->
+{% load static %}
+
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+
+      <!-- Footer Column -->
+      <div class="col-lg-3 footer_column">
+        <div class="footer_col">
+          <div class="footer_content footer_about">
+            <div class="logo_container footer_logo">
+              <div class="logo"><a href="#"><img src="{% static 'images/logo.png' %}" alt="" class="screenListener"></a></div>
+              <style>
+                  @media only screen and (max-width: 576px){
+                      .screenListener{
+                          height: 55px !important;
+                          width: 60px !important;
+                      }
+    }
+              </style>
+            </div>
+            <p class="footer_about_text">We are an intermediary agency that gets the job done. We bring you the best and exciting lodges at affordable and amazing prices. We are simply here for YOU!</p>
+            <ul class="footer_social_list">
+              <li class="footer_social_item"><a href="#"><i class="fa fa-facebook-f"></i></a></li>
+              <li class="footer_social_item"><a href="#"><i class="fa fa-instagram"></i></a></li>
+              <li class="footer_social_item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+              <li class="footer_social_item"><a href="#"><i class="fa fa-google"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Column -->
+      <div class="col-lg-3 footer_column">
+        <div class="footer_col">
+          <div class="footer_title">contact info</div>
+          <div class="footer_content footer_contact">
+            <ul class="contact_info_list">
+              <li class="contact_info_item d-flex flex-row">
+                <div><div class="contact_info_icon"><img src="{% static 'images/placeholder.svg' %}" alt=""></div></div>
+                <div class="contact_info_text">University Of Nigeria, Nsukka</div>
+              </li>
+              <li class="contact_info_item d-flex flex-row">
+                <div><div class="contact_info_icon"><img src="{% static 'images/phone-call.svg' %}" alt=""></div></div>
+                <div class="contact_info_text">+234-908-045-0821</div>
+              </li>
+              <li class="contact_info_item d-flex flex-row">
+                <div><div class="contact_info_icon"><img src="{% static 'images/message.svg' %}" alt=""></div></div>
+                <div class="contact_info_text"><a href="mailto:contactme@gmail.com?Subject=Hello" target="_top">lodgees@gmail.com</a></div>
+              </li>
+              <!-- <li class="contact_info_item d-flex flex-row">
+                <div><div class="contact_info_icon"><img src="{% static 'images/planet-earth.svg' %}" alt=""></div></div>
+                <div class="contact_info_text"><a href="{% url 'https://colorlib.com">www.colorlib.com</a></div>
+              </li> -->
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+<!-- Copyright -->
+
+<div class="copyright">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 order-lg-1 order-2  ">
+        <div class="copyright_content d-flex flex-row align-items-center">
+          <div>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved<br><a href="{% url 'index' %}" target="_blank">LODGEES.COM</a></div>
+        </div>
+      </div>
+      <div class="col-lg-9 order-lg-2 order-1">
+        <div class="footer_nav_container d-flex flex-row align-items-center justify-content-lg-end">
+          <div class="footer_nav">
+            <ul class="footer_nav_list">
+              <li class="footer_nav_item"><a href="{% url 'index' %}">home</a></li>
+              <li class="footer_nav_item"><a href="{% url 'about' %}">about us</a></li>
+              <li class="footer_nav_item"><a href="{% url 'offers' %}">offers</a></li>
+              <li class="footer_nav_item"><a href="{% url 'search' %}">discover</a></li>
+              <li class="footer_nav_item"><a href="{% url 'contact' %}">contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>

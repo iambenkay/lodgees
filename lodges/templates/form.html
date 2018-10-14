@@ -1,0 +1,54 @@
+{% load static %}
+<div class="search">
+
+
+  <!-- Search Contents -->
+
+  <div class="container fill_height">
+    <div class="row fill_height">
+      <div class="col fill_height">
+
+        <!-- Search Tabs -->
+
+        <div class="search_tabs_container">
+          <div class="search_tabs d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
+            <div class="search_tab active d-flex flex-row align-items-center justify-content-lg-center justify-content-start"><img src="{% static 'images/suitcase.png' %}" alt=""><span>lodge</span></div>
+            <div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start"><img src="{% static 'images/bus.png' %}" alt="">zone</div>
+          </div>
+        </div>
+
+        <!-- Search Panel -->
+
+        <div class="search_panel active">
+          <form action="{% url 'search' %}" id="search_form_1" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
+            <div class="search_item">
+              <div>Lodge</div>
+              <input type="text"  placeholder="Search Lodge name" name="lodge" class="destination search_input res-input" required="required">
+              <input type="text" style="display:none" name="val" value="lodge">
+            </div>
+            <button class="button search_button">search<span></span><span></span><span></span></button>
+          </form>
+        </div>
+
+
+        <div class="search_panel">
+          <form action="{% url 'search' %}" id="search_form_2" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
+            <div class="search_item">
+              <div>Zone</div>
+              <input type="text" placeholder="Search Zone" name="zone" class="destination search_input res-input" required="required">
+              <input type="text" style="display:none" name="val" value="zone">
+            </div>
+            <button class="button search_button">search<span></span><span></span><span></span></button>
+          </form>
+        </div>
+        <style>
+        @media screen and (min-width: 992px){
+          .res-input{
+              width: 200%;
+          }
+        }
+        </style>
+      </div>
+    </div>
+  </div>
+</div>

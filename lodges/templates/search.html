@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <title>Offers</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="lodges.com Project">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
+    <link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/offers_styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/offers_responsive.css' %}">
+</head>
+
+<body>
+{% include 'nav.html' %}
+<div class="home">
+    <div class="home_background parallax-window" data-parallax="scroll"
+         data-image-src="{% static 'images/findlodges.jpg' %}"></div>
+    <div class="home_content">
+        <div class="home_title">search</div>
+    </div>
+</div>
+
+{% include 'form.html' %}
+<!-- Home -->
+
+<div class="offers">
+
+    <!-- Offers -->
+
+    <div class="container" id="isearch">
+        <div class="row">
+            <div class="col-lg-1 temp_col"></div>
+            <div class="col-lg-11">
+                <!-- Offers Grid -->
+
+                <div class="offers_grid">
+                    {% if lodges %}
+                        {% for lodge in lodges %}
+                            <!-- Offers Item -->
+
+                            <div class="offers_item rating_4">
+                                <div class="row">
+                                    <div class="col-lg-1 temp_col"></div>
+                                    <div class="col-lg-3 col-1680-4">
+                                        <div class="offers_image_container">
+                                            <!-- Image by https://unsplash.com/@kensuarez -->
+                                            <div class="offers_image_background"
+                                                 style="background-image:url({% static 'images/offer_1.jpg' %})"></div>
+                                            <div class="offer_name"><a
+                                                    href="{% url 'offers_zone' lodge.zone.id %}">{{ lodge.zone }}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <div class="offers_content">
+                                            <div class="offers_price">&#8358; {{ lodge.price }}<span> only</span></div>
+                                            <p class="offers_text">
+                                            <h3 style="font-weight: bolder; color: #311245; font-family: ubuntu;">{{ lodge.name }}
+                                                lodge</h3>
+                                            <h4>{{ lodge.short_description }}</h4>
+                                            {{ lodge.description }}
+                                            </p>
+                                            <div class="button book_button"><a href="{% url 'listing' lodge.id %}">details<span></span><span></span><span></span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <center><h2 style="font-family: ubuntu;" id="msg">{{ message }}</h2></center>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% include 'footer.html' %}
+
+<script>
+    if (!document.querySelector('#msg'))
+        window.location = "#isearch";
+</script>
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'styles/bootstrap4/popper.js' %}"></script>
+<script src="{% static 'styles/bootstrap4/bootstrap.min.js' %}"></script>
+<script src="{% static 'plugins/Isotope/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'plugins/easing/easing.js' %}"></script>
+<script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
+<script src="{% static 'js/offers_custom.js' %}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <title>Lodgees.com</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="{% static 'images/icons/favicon.png' %}"/>
+<!--===============================================================================================-->
+	<link rel=" stylesheet
+    " type="text/css" href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/iconic/css/material-design-iconic-font.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/animate/animate.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/css-hamburgers/hamburgers.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/animsition/css/animsition.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/select2/select2.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/daterangepicker/daterangepicker.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/util.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <!--===============================================================================================-->
+</head>
+<body>
+
+<div class="limiter">
+    <div class="container-login100" style="background-image: url({% static 'images/bg-01.jpg' %});">
+        <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
+            <form class="login100-form validate-form" action="{% url 'signup' %}" method="post">
+                {% csrf_token %}
+                <span class="login100-form-title p-b-49">
+						Register
+					</span>
+                <div style="width: 70%;color: #c80000;text-align: center;margin:auto;padding-top: 15px;display: block;">
+                    {{ errors }}
+                </div>
+                <div class="wrap-input100 validate-input m-b-23" data-validate="Valid email is required: ex@abc.xyz"
+                     id="father2">
+                    <span class="label-input100">Email</span>
+                    <input class="input100 email" type="email" name="email" placeholder="Type your email">
+                    <span class=" fa fa-envelope focus-input100" data-symbol="&#xf0e0;"></span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-23" data-validate="First name name is required">
+                    <span class="label-input100">First Name</span>
+                    <input class="input100" type="text" name="firstname" placeholder="Enter your first name">
+                    <span class=" fa fa-envelope focus-input100" data-symbol="&#xf2c1;"></span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-23" data-validate="Last name is required">
+                    <span class="label-input100">Last Name</span>
+                    <input class="input100" type="text" name="lastname" placeholder="Enter your last name">
+                    <span class=" fa fa-envelope focus-input100" data-symbol="&#xf2c1;"></span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-23" data-validate="Username is required" id="father1">
+                    <span class="label-input100">Username</span>
+                    <input class="input100 username" type="text" name="username" placeholder="Choose your username">
+                    <span class=" fa fa-envelope focus-input100" data-symbol="&#xf007;"></span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-23" data-validate="Phone Number is required"
+                     id="phoneParent">
+                    <span class="label-input100">Phone Number</span>
+                    <input class="input100" type="text" name="phone" placeholder="Enter Phone Number" id="phone">
+                    <span class=" fa fa-envelope focus-input100" data-symbol="&#xf10b;"></span>
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="Password is required" id="father0">
+                    <span class="label-input100">Password</span>
+                    <input class="input100" type="password" name="password" placeholder="Type your password" id="pass1">
+                    <span class=" fa fa-envelope focus-input100" data-symbol="&#xf023;"></span>
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="Password confirmation is required" id="father">
+                    <span class="label-input100">Confirm Password</span>
+                    <input class="input100" type="password" name="password2" id="pass2"
+                           placeholder="Re-enter your password">
+                    <span class=" fa fa-envelope  focus-input100" data-symbol="&#xf023;"></span>
+                </div>
+
+                <div class="text-right p-t-8 p-b-31">
+                    ...
+                </div>
+                <div class="container-login100-form-btn">
+                    <div class="wrap-login100-form-btn">
+                        <div class="login100-form-bgbtn"></div>
+                        <button class="login100-form-btn" onclick="check()" method="post" action="">
+                            Create Account
+                        </button>
+                    </div>
+                </div>
+
+                <div class="txt1 text-center p-t-54 p-b-20">
+                    <span>Already have an account?</span>
+                    <a href="{% url 'login' %}" class="txt2">
+                        Login
+                    </a><br><br>
+                    <a href="{% url 'index' %}" class="txt2">
+                        Home
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function check() {
+        var pass1 = document.getElementById("pass1").value;
+        var pass2 = document.getElementById("pass2").value;
+        if (pass1.length < 8 && pass1.length != 0) {
+            document.getElementById("father0").classList.add("alert-validate");
+            document.getElementById("father0").setAttribute("data-validate", "Password must not be less than eight [8] characters")
+        }
+
+        if (pass1 != pass2) {
+            document.getElementById("father").classList.add("alert-validate");
+            document.getElementById("father").setAttribute("data-validate", "Passwords don't match");
+        }
+
+        ///Validating Phone Number
+        var phone = document.getElementById("phone").value;
+        if (isNaN(phone)) {
+            document.getElementById("phoneParent").classList.add("alert-validate");
+            document.getElementById("phoneParent").setAttribute("data-validate", "Only Numbers are allowed");
+        }
+        else {
+            if (/^[+]+234/.test(phone)) {
+
+                if (phone.length != 14) {
+                    console.log('true');
+                    document.getElementById("phoneParent").classList.add("alert-validate");
+                    document.getElementById("phoneParent").setAttribute("data-validate", "With country code, Number must be 14 Characters");
+                }
+            }
+            else if (/0/.test(phone)) {
+                if (phone.length != 11) {
+                    document.getElementById("phoneParent").classList.add("alert-validate");
+                    document.getElementById("phoneParent").setAttribute("data-validate", "Without +234, Only 11 Characters are allowed");
+                }
+            }
+            else if (phone.length != '') {
+                document.getElementById("phoneParent").classList.add("alert-validate");
+                document.getElementById("phoneParent").setAttribute("data-validate", "Invalid: 09012345678, +2349012345678");
+            }
+        }
+    }
+</script>
+
+<!--===============================================================================================-->
+<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
+<!--===============================================================================================-->
+<script src="{% static 'vendor/animsition/js/animsition.min.js' %}"></script>
+<!--===============================================================================================-->
+<script src="{% static 'vendor/bootstrap/js/popper.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+<!--===============================================================================================-->
+<script src="{% static 'vendor/select2/select2.min.js' %}"></script>
+<!--===============================================================================================-->
+<script src="{% static 'vendor/daterangepicker/moment.min.js' %}"></script>
+<script src="{% static 'vendor/daterangepicker/daterangepicker.js' %}"></script>
+<!--===============================================================================================-->
+<script src="{% static 'vendor/countdowntime/countdowntime.js' %}"></script>
+<!--===============================================================================================-->
+<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>

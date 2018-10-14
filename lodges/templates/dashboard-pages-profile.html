@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/assets/images/favicon.png">
+    <title>Profile -- lodgees</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="/static/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- chartist CSS -->
+    <link href="/static/assets/plugins/chartist-js/dist/chartist.min.css" rel="stylesheet">
+    <link href="/static/assets/plugins/chartist-js/dist/chartist-init.css" rel="stylesheet">
+    <link href="/static/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css" rel="stylesheet">
+    <!--This page css - Morris CSS -->
+    <link href="/static/assets/plugins/c3-master/c3.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/static/css/style.css" rel="stylesheet">
+    <!-- You can change the theme colors from here -->
+    <link href="/static/css/colors/blue.css" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+
+<body class="fix-header fix-sidebar card-no-border">
+<!-- ============================================================== -->
+<!-- Preloader - style you can find in spinners.css -->
+<!-- ============================================================== -->
+<div class="preloader">
+    <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+    </svg>
+</div>
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
+<div id="main-wrapper">
+    <!-- ============================================================== -->
+    <!-- Topbar header - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    {% include 'dashboard-nav.html' %}
+    <!-- ============================================================== -->
+    <!-- End Topbar header -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+    <aside class="left-sidebar">
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav">
+                <ul id="sidebarnav">
+                    <li><a class="waves-effect waves-dark" href="/dashboard" aria-expanded="false"><i
+                            class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard</span></a>
+                    </li>
+                    <li><a class="waves-effect waves-dark" href="/dashboard/profile" aria-expanded="false"><i
+                            class="mdi mdi-account-check"></i><span class="hide-menu">Profile</span></a>
+                    </li>
+                    <li><a class="waves-effect waves-dark" href="/dashboard/transaction" aria-expanded="false"><i
+                            class="mdi mdi-history"></i><span class="hide-menu">Transaction History</span></a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+        <!-- Bottom points-->
+        {% include 'dashboard-bar-footer.html' %}
+        <!-- End Bottom points-->
+    </aside>
+    <!-- ============================================================== -->
+    <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Page wrapper  -->
+    <!-- ============================================================== -->
+    <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="row page-titles">
+                <div class="col-md-5 col-8 align-self-center">
+                    <h3 class="text-themecolor m-b-0 m-t-0">Profile</h3>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item active">Profile</li>
+                    </ol>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ============================================================== -->
+            <!-- Row -->
+            <div class="row">
+                <!-- Column -->
+                <div class="col-lg-8 col-xlg-9 col-md-7" style="margin: auto">
+                    <div class="card">
+                        <div class="card-block">
+                            <form class="form-horizontal form-material">
+                                <div class="form-group">
+                                    <label class="col-md-12">First Name</label>
+                                    <div class="col-md-12">
+                                        <input type="text" value="{{ profile.firstname }}"
+                                               class="form-control form-control-line">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">Last Name</label>
+                                    <div class="col-md-12">
+                                        <input type="text" value="{{ profile.lastname }}"
+                                               class="form-control form-control-line">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">Username</label>
+                                    <div class="col-md-12">
+                                        <input name="username" type="text" value="{{ user.username }}"
+                                               class="form-control form-control-line">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="example-email" class="col-md-12">Email</label>
+                                    <div class="col-md-12">
+                                        <input type="email" value="{{ profile.email }}"
+                                               class="form-control form-control-line" name="email" id="example-email">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-12">Phone No</label>
+                                    <div class="col-md-12">
+                                        <input name="phone" type="text" value="{{ profile.phone }}"
+                                               class="form-control form-control-line">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-12">Gender</label>
+                                    <div class="col-sm-12">
+                                        <select name="gender" class="form-control form-control-line">
+                                            <option value="rather not say">Rather not say</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <a class="btn btn-success" id="change" onclick="changePassword()"><span
+                                                class="mdi mdi-lock"></span> Change Password</a>
+                                    </div>
+                                </div>
+
+                                <div id="deltaPassword" style="display: none">
+                                    <div class="form-group">
+                                        <label class="col-md-12">Current Password</label>
+                                        <div class="col-md-12">
+                                            <input type="password"
+                                                   class="form-control form-control-line">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-12">New Password</label>
+                                        <div class="col-md-12">
+                                            <input type="password" onkeyup="validate()" id="password1"
+                                                   class="form-control form-control-line">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-12">Confirm Password</label>
+                                        <div class="col-md-12">
+                                            <input name="password" type="password" id="password2" onkeyup="validate()"
+                                                   class="form-control form-control-line">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="error" id="error">
+                                    error
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <button class="btn btn-success" i id="save" style="display: block"><span
+                                                class="mdi mdi-content-save"></span> Save Changes
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Column -->
+            </div>
+
+            <style>
+                .error {
+                    color: #800000;
+                    text-align: center;
+                    display: none;
+                }
+            </style>
+
+            <!-- Row -->
+            <!-- ============================================================== -->
+            <!-- End PAge Content -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Container fluid  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+        <footer class="footer">
+            © 2018 Lodgees.com
+        </footer>
+        <!-- ============================================================== -->
+        <!-- End footer -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Page wrapper  -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Wrapper -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- All Jquery -->
+<!-- ============================================================== -->
+
+<script>
+
+    var sel = document.querySelector.bind(document);
+
+    function changePassword() {
+        sel('#change').style.display = 'none';
+        sel('#deltaPassword').style.display = 'block';
+        sel('#save').style.display = 'none';
+//            sel('#fake').style.display = 'block';
+    }
+
+    function validate() {
+        if (sel('#password1').value.length < 8) {
+            sel('.error').innerHtml = '';
+            sel('.error').style.display = 'block';
+            sel('.error').innerHTML = "<span id ='length-error'><span class='mdi mdi-alert-circle-outline'></span> Password must be greater or equal to 8 </span>";
+            sel('#save').style.display = 'none';
+//                sel('#fake').style.display = 'block';
+        }
+        if (sel('#password1').value.length >= 8) {
+            if (sel('#password1').value != sel('#password2').value) {
+                sel('.error').innerHtml = '';
+                sel('.error').style.display = 'block';
+                sel('.error').innerHTML = "<span id='match-error'><span class='mdi mdi-alert-circle-outline'></span> Passwords dont match</span>";
+                sel('#save').style.display = 'none';
+//                    sel('#fake').style.display = 'block';
+            }
+            else {
+                sel('#match-error').style.display = 'none';
+                sel('.error').style.display = 'none';
+//                    sel('#fake').style.display = 'none';
+                sel('#save').style.display = 'block';
+            }
+        }
+    }
+</script>
+
+<script src="/static/assets/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap tether Core JavaScript -->
+<script src="/static/assets/plugins/bootstrap/js/tether.min.js"></script>
+<script src="/static/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<!-- slimscrollbar scrollbar JavaScript -->
+<script src="/static/js/jquery.slimscroll.js"></script>
+<!--Wave Effects -->
+<script src="/static/js/waves.js"></script>
+<!--Menu sidebar -->
+<script src="/static/js/sidebarmenu.js"></script>
+<!--stickey kit -->
+<script src="/static/assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
+<!--Custom JavaScript -->
+<script src="/static/js/custom.min.js"></script>
+</body>
+
+</html>

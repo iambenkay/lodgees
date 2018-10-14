@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body, html{
+            margin: 0;  
+        }
+        .warning{
+            color: #f00;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h2><u>Click the Icon below to proceed to payment gateway:</u></h2>
+        <form>
+            <script src="http://www.remitademo.net/payment/v1/remita-pay-inline.bundle.js"></script>
+            <button type="button" style="border: none; background: white;" onclick="makePayment()"><img src="/static/images/remita.png" width="200" /></button>
+        </form>
+        <script>
+            function makePayment() {
+                var paymentEngine = RmPaymentEngine.init({
+                key: "YmVuamFtaW5jYXRoQGdtYWlsLmNvbXw0MDkyNjE1MHw1YzVmNjFiZGI4ZDlmY2M3YzBmNjQ4N2NkMDIzNjg3ZDNkOWUzYjgwNzE5NDdkNTVmZWU5NjM3YjNiZTM4ZTc0YTBmNDUxMzdjYjIwYTRkMDE0ODBhZmRiZDc2MmRlODVkOTQ3YjliMTg2YmUxMmU2YjBjYjEzMjc2ODZkNjgyZg==",
+                    customerId: "{{ t.user.id }}",
+                    firstName: "{{ t.user.profile.firstname }}",
+                    lastName: "{{ t.user.profile.lastname }}",
+                    email: "{{ user.profile.email }}",
+                    narration: "Payment for Accomodation at lodgees.com",
+                    amount: {{ t.lodge.price }},
+                    onSuccess: function (response) {
+                        console.log('callback Successful Response', response);
+                    },
+                    onError: function (response) {
+                        console.log('callback Error Response', response);
+                    },
+                    onClose: function () {
+                        console.log("closed");
+                    }
+                    });
+
+                paymentEngine.showPaymentWidget();
+            }
+        </script>
+        <br>
+        <span class="warning">If you are reading this message, payment portal is under management. Do not attempt any transactions.</span>
+    </center>
+</body>
+</html>

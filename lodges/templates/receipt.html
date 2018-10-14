@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="/static/styles/bootstrap4/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/scss/icons/material-design-iconic-font/css/materialdesignicons.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/myFonts.css">
+    <title>Receipt</title>
+</head>
+<style>
+    html, body{
+        margin: 0;
+        min-height: 100vh;
+        background: #f2f2f2;
+    }
+    .logo{
+        border-right: 20px solid #fa9e18;
+        border-bottom: 20px solid #fa9e18;
+        border-top: 20px solid #fff;
+        border-left: 20px solid #8d4fff;
+        border-radius: 0 0 20px 20px;
+        width: fit-content;
+        position: absolute;
+        top: 40px;
+        left: 40px;
+    }
+    .receipt{
+        width: 190mm;
+        height: 130mm;
+        box-shadow: 0 0 6px #aaa;
+        margin: auto;
+        margin-top: 20px;
+        background: white;
+        position: relative;
+    }
+    .btn-wrapper{
+        text-align: right;
+        padding: 20px;
+        padding-right: 100px;
+    }
+    .btn-item, .btn-item:hover{
+        height: 40px;
+        color: white;
+        border: none;
+        border-radius: 7px;
+        font-weight: bold;
+        padding: 0 15px;
+        transition: background-color 0.4s;
+    }
+    .btn-item{
+        background: rgb(24, 24, 223);
+    }
+    .btn-item:hover{
+        background: rgb(14, 13, 13);
+    }
+    .col-11 > div{
+        font-size: 13px;
+    }
+    .receipt span{
+        font-weight: 500;
+    }
+    .signature{
+        border: none;
+        border-bottom: 1px solid #444;
+        width: 250px;
+        margin: auto;
+        text-align: center;
+        font-size: 25px;
+        font-family: purisa;
+    }
+    * { font-family: ubuntu; }
+    .signature + div{
+        margin: auto;
+        width:fit-content;
+        font-size: 15px;
+        font-family: ubuntu;
+    }
+    .bottom{
+        position:absolute;
+        bottom: 20px;
+        width: fit-content;
+        right: 40px;
+    }
+    .receipt h4{
+        text-align: center;
+        position: relative;
+        top: 100px;
+        text-decoration: underline;
+    }
+    .pic{
+        position: absolute;
+        left: 20px;
+        top: 20px;
+    }
+    /* * { border: 0.5px solid red; } */
+</style>
+<body>
+    <div class="btn-wrapper">
+        <button class="btn-item">Print Receipt&nbsp;<span class="mdi mdi-printer"></span></button>
+    </div>
+    <div class="receipt container-fluid">
+        <!-- <div class="logo"></div> -->
+        <img src="/static/images/logo.png" class="pic" />
+        <h4>TRANSACTION RECEIPT</h4>
+        <div class="row" style="padding-top: 120px;">
+            <div class="col-6">
+                <div class="col-11">
+                    <div><span>FIRST NAME: </span>{{t.user.profile.firstname}}</div><br>
+                    <div><span>LAST NAME: </span>{{t.user.profile.lastname}}</div><br>
+                    <div><span>LODGE NAME: </span>{{t.lodge.name}}</div><br>
+                    <div><span>ZONE: </span>{{t.lodge.zone}}</div><br>
+                    <div><span>DATE: </span>{{t.time}}</div><br>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="col-11">
+                    <div><span>AMOUNT PAID: </span>&#8358; {{t.lodge.price}}</div><br>
+                    <div><span>TRANSACTION ID: </span> </span>{{t.id}}</div><br>
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="signature">UdekweChin</div>
+            <div>Chinweike Udekwe - Director</div>
+        </div>
+    </div>
+<script src="/static/js/jquery-3.2.1.min.js"></script>
+<script src="/static/styles/bootstrap4/popper.js"></script>
+<script src="/static/styles/bootstrap4/bootstrap.min.js"></script>
+<script>
+    document.querySelector(".btn-item").onclick = function(){
+        this.style.visibility = "hidden";
+        window.print();
+        this.style.visibility = "visible";
+    }
+</script>
+</body>
+</html>

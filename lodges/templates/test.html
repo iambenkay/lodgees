@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>XMLHttpRequest Test</title>
+</head>
+<body>
+    <script>
+        var Xhr
+        if(XMLHttpRequest) Xhr = new XMLHttpRequest()
+        else Xhr = new ActiveXObject("MicrosoftXMLHTTP")
+
+        Xhr.onreadystatechange = function(){
+            if(Xhr.status == 200 && Xhr.readyState == 4){
+                setTimeout(() => {
+                    let obj = JSON.parse(Xhr.responseText)
+                    console.log(obj)
+                    document.write(`<h2>Hey ${obj["name"]}. From what we got from our servers you are in ${obj["department"]} in ${obj["faculty"]}...</h2>`)
+                }, 3e3)
+            }
+        }
+        Xhr.open("GET", "/api")
+        Xhr.send()
+    </script>
+</body>
+</html>
