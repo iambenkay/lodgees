@@ -122,7 +122,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-EMAIL_HOST = "localhost"
-EMAIL_PORT = 25
-
 django_heroku.settings(locals())
