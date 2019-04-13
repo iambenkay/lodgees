@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load static %}
+{% load staticfiles %}
 <html lang="en">
 <head>
     <title>Lodgees.com</title>
@@ -18,6 +18,20 @@
 </head>
 
 <body>
+<style>
+    .debug{
+        border: 1px solid red;
+    }
+    .debug-blue{
+        border: 1px solid blue;
+    }
+    .debug-pink{
+        border: 1px solid pink;
+    }
+    .debug-black{
+        border: 1px soild black;
+    }
+</style>
 
 {% include 'nav.html' %}
 <!-- Home -->
@@ -148,109 +162,59 @@
 {% include 'form.html' %}
 
 <!-- CTA -->
-<br>
-<div class="row margin">
-    <div class="col-1"></div>
-    <div class="col-10">
-        <div class="row">
-            <div class="col-lg-6 col-xs-12">
-                <div class="row margin">
-                    <div class="col-1"></div>
-                    <div class="col-10 info">
-                        <span class="mdi mdi-google-circles-extended"></span>
-                        <h2>End to End Satisfaction</h2>
-                        <div>
-                            Lodgees will help you move in whenever you are ready to move in and also
-                            hand you a key to your apartment. Give us a call or specify on your request and we'll
-                            send our best officers to take care of you.
-                        </div>
-                    </div>
-                    <div class="col-1"></div>
-                </div>
+
+<div class="row overall ">
+
+    <!-- Row_1 -->
+    <div class="row group">
+        <div class="col-lg-4 col-xs-12">
+            <div class="container icon">
+                <span class="mdi mdi-google-circles-extended lodgees-icon"></span>
             </div>
-            <div class="col-lg-6 col-xs-12">
-                <div class="row margin">
-                    <div class="col-1"></div>
-                    <div class="col-10 info">
-                        <span class="mdi mdi-cash"></span>
-                        <h2>You never really lose</h2>
-                        <div>
-                            With our wonderful incentives to appreciate every customer, you never
-                            really lose any dime when working with us. At lodgees, our maximum attention belongs to
-                            every Customer.
-                        </div>
-                    </div>
-                    <div class="col-1"></div>
-                </div>
-            </div>
+            <div class="title">
+                End to End Satisfaction
+            </div>            
+            <div class="msg">
+                    Lodgees will help you move in whenever you are ready to move in and also
+                    hand you a key to your apartment. Give us a call or specify on your request and we'll
+                    send our best officers to take care of you.
+            </div>  
         </div>
-        <div class="row">
-            <div class="col-lg-6 col-xs-12">
-                <div class="row margin">
-                    <div class="col-1"></div>
-                    <div class="col-10 info">
-                        <span class="mdi mdi-home"></span>  
-                        <h2>Get Accomodation Easily</h2>
-                        <div>
-                            Say bye to spending lots of useful time searching for accomodation. With
-                            lodgees, an online agency that solves the problem of accomodation in
-                            Nigerian schools, a lodge is a few clicks away.
-                        </div>
-                    </div>
-                    <div class="col-1"></div>
+
+        <div class="col-lg-4 col-xs-12">
+                <div class="container icon">
+                    <span class="mdi mdi-hotel lodgees-icon"></span>
                 </div>
-            </div>
-            <div class="col-lg-6 col-xs-12">
-                <div class="row margin">
-                    <div class="col-1"></div>
-                    <div class="col-10 info">
-                        <span class="mdi mdi-emoticon-excited"></span>
-                        <h2>Comfort First Rule</h2>
-                        <div>
-                            Secure your dream lodge from the comfort of your home and be rest
-                            assured that your request is honored. We have staff working around the clock to ensure
-                            that you get the extra extra package.
-                        </div>
-                    </div>
-                    <div class="col-1"></div>
-                </div>
-            </div>
+                <div class="title">
+                    Get Accomodations Easily
+                </div>            
+                <div class="msg">
+                    Say bye to spending lots of useful time searching for accomodation. With
+                    lodgees, an online agency that solves the problem of accomodation in
+                    Nigerian schools, a lodge is a few clicks away.
+                </div>  
         </div>
-        <div class="row">
-            <div class="col-lg-6 col-sm-12">
-                <div class="row margin">
-                    <div class="col-1"></div>
-                    <div class="col-10 info">
-                        <span class="mdi mdi-chart-areaspline"></span>
-                        <h2>Best prices</h2>
-                        <div>
-                            We help regulate prices for you. Our motto - Our customer, Our
-                            priority!! says it all. We ensure you get excellent service even more than what you paid
-                            for.
-                        </div>
-                    </div>
-                    <div class="col-1"></div>
+
+        <div class="col-lg-4 col-xs-12">
+                <div class="container icon">
+                    <span class="mdi mdi-account-check lodgees-icon"></span>
                 </div>
-            </div>
-            <div class="col-lg-6 col-sm-12">
-                <div class="row margin">
-                    <div class="col-1"></div>
-                    <div class="col-10 info">
-                        <span class="mdi mdi-account-check"></span>
-                        <h2>Policy System</h2>
-                        <div>
-                            Our beautiful policy system ensure your maximum flexibility with us. We
-                            have really wonderful working policies that make your stay with us even more of a swirl
-                            adventure.
-                        </div>
-                    </div>
-                    <div class="col-1"></div>
-                </div>
-            </div>
-        </div>
+                <div class="title">
+                    Excellent Policy System
+                </div>            
+                <div class="msg">
+                    Our beautiful policy system ensure your maximum flexibility with us. We
+                    have really wonderful working policies that make your stay with us even more of a swirl
+                    adventure.
+                </div>  
+        </div> 
     </div>
-    <div class="col-1"></div>
+         
 </div>
+
+
+
+
 <style>
     .info {
         text-align: center;
@@ -264,40 +228,83 @@
     .info span{
         font-size: 150px;
     }
-    .margin{
+    /* .margin{
         margin-top: 40px;
+    } */
+    .lodgees-icon{
+        /* border: 1px solid black; */
+        font-weight: bold;
+        font-size: 8em;
+    }
+    .icon{
+        /* border: 1px solid red; */
+        width: 10.8em;
+    }
+    .title{
+        font-size: 2.0em;
+        font-weight: bold;
+    }
+    .title, .msg{
+        text-align: center;
+    }
+    .overall{
+        margin: auto;   
+    }
+    .msg{
+        width: 90%;
+        padding-bottom: 20px;
+        margin: auto;
+        font-size: 1.2em;
+        /* border: 1px solid black; */
+    }
+    .group{
+        /* align-content: center; */
+        /* align-items: center */
+        /* border: 1px solid olive; */
+        padding:10px
+    }
+    .lodgeBox{
+        /* display: flex; */
+    }
+    .lodge-card{
+        box-shadow: 1.7px 1.7px 3px #000;
     }
 </style>
 <!-- Intro -->
-<div class="intro">
+
     <div class="container">
-        <div class="row intro_items">
+        <div class="row intro_items ">
             {% for z in zones %}
                 <!-- Intro Item -->
-                <div class="col-lg-4 intro_col" style="margin-bottom: 40px;">
+                <div class="col-lg-4 intro_col " style="margin-bottom: 40px;">
                     <div class="intro_item">
                         <div class="intro_item_overlay"></div>
                         <!-- Image by https://unsplash.com/@dnevozhai -->
-                        <div class="intro_item_background"
-                             style="background-image:url('/static/images/intro_1.jpg')"></div
+                        <div class="intro_item_background lodge-card    "
+                             style="background-image:url('/static/images/intro_1.jpg')"></div>
                         <div class="intro_item_content d-flex flex-column align-items-center justify-content-center">
                             <div class="button intro_button">
                                 <div class="button_bcg"></div>
                                 <a href="{% url 'offers_zone' z.id %}">see
-                                    more<span></span><span></span><span></span></a></div>
+                                    Lodges<span></span><span></span><span></span></a></div>
                             <div class="intro_center text-center">
                                 <h1>{{ z.name }}</h1>
                             </div>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
-            <span style="margin: auto; font-size: 20px;">visit <a href="/zones">lodgees.com/zones</a> to see full zone listing</span>
-
+            {% endfor %}   
+         </div>
+        <div style="text-align: center; 
+         /* border-top: 1px solid red; */
+         margin-bottom: 30px;" class="">
+          <button  class="btn"style="
+            background: #31124b;
+            font-size: 1.5em;"><a href="/zones" class="mdi mdi-apps" style="color: #fff"> More </a></button>
         </div>
+
     </div>
 </div>
-
 <div class="contact">
     <div class="contact_background" style="background-image:url({% static 'images/contact.png' %})"></div>
 

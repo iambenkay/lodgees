@@ -8,6 +8,7 @@ import re
 from django.db.utils import IntegrityError
 from .search import find as advanced_search
 import random
+from django.core.mail import send_mail
 
 
 # Create your views here.
@@ -114,6 +115,7 @@ def print_receipt(request,t_id):
         else:
             return HttpResponseRedirect("/dashboard")
 
+
 def login(request):
     context = {
         "next": "/" if "next" not in request.GET else "%s" % request.GET['next'],
@@ -133,6 +135,7 @@ def login(request):
         else:
             try:
                 alt_user = auth.authenticate(username=User.objects.get(email=username).username, password=password)
+                print(alt_user)
                 if alt_user.is_active:
                     auth.login(request, alt_user)
                     return HttpResponseRedirect(request.GET["next"] if "next" in request.GET else "/dashboard")

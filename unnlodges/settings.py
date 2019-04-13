@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'd-he9nun)%skwa3isyk9q_%v33atk)w&f04&*jq72tvvu8^uq6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ["199.195.116.100"]
+ALLOWED_HOSTS = ["199.195.116.100", "127.0.0.1", "localhost", "192.168.43.161"]
 
 
 # Application definition
@@ -120,6 +120,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "lodges/static"),
-]
+
+EMAIL_HOST = "localhost"
+EMAIL_PORT = 25

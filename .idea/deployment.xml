@@ -5,7 +5,7 @@
       <paths name="199.195.116.100">
         <serverdata>
           <mappings>
-            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/var/www/html/lodgees" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

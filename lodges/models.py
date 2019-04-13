@@ -25,8 +25,8 @@ class Lodge(models.Model):
     description = models.CharField(max_length=150, default="")
     applicants = models.ManyToManyField(User, related_name="interests", blank=True)
 
-    def __str__(self):
-        return "%s Lodge in %s" % (self.name, self.zone)
+    # def __str__(self):
+    #     return "%s Lodge in %s" % (self.name, self.zone)
 
 
 class Transaction(models.Model):
@@ -35,16 +35,16 @@ class Transaction(models.Model):
     time = models.DateField(default=django.utils.timezone.now)
     status = models.BooleanField(default=False)
 
-    def __str__(self):
-        return "#%i - for %s by %s" % (self.id, self.lodge, self.time, self.user)
+    # def __str__(self):
+    #     return "#%i - for %s by %s" % (self.id, self.lodge, self.time, self.user)
 
 
 class Testimony(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="testimony")
     testimony = models.CharField(max_length=800)
 
-    def __str__(self):
-        return "%s wrote a testimony." % self.user
+    # def __str__(self):
+    #     return "%s wrote a testimony." % self.user
 
 
 class Profile(models.Model):
@@ -55,5 +55,5 @@ class Profile(models.Model):
     email = models.CharField(max_length=70, unique=True, default="example@gmail.com")
     gender = models.CharField(max_length=15, default="Rather not say")
 
-    def __str__(self):
-        return "%s %s" % (self.firstname, self.lastname)
+    # def __str__(self):
+    #     return "%s %s" % (self.firstname, self.lastname)
